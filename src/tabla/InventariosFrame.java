@@ -1,7 +1,7 @@
 
 package tabla;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -425,8 +425,11 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
 
         }catch(Exception ex){
             System.out.println("Error, " +ex);
+            JOptionPane.showMessageDialog(null, "Codigo ya registrado");
         }
         
+        
+     
         
     }//GEN-LAST:event_botonInsertarActionPerformed
 
@@ -547,10 +550,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cajaBuscarKeyReleased
 
+    
     private void cajaBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaBuscarKeyPressed
-        
-        
-        
         
         
     }//GEN-LAST:event_cajaBuscarKeyPressed
