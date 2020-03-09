@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +16,12 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     
     public InventariosFrame() {
         initComponents();
+        Date myDate = new Date();
+
+        //Aquí obtienes el formato que deseas
+        cajaFechaInicio.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
+        cajafechaRecojo.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
+
     }
 
     
@@ -298,7 +306,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         String where = "";
         
         if (!"".equals(campo)) {
-            where = "where nombre like '%"+campo+"%' or codigo like '%"+campo+"%' or apellido like '%"+campo+"%'";
+            where = "where nombre like '%"+campo+"%' or codigo like '%"+campo+"%' or apellido like '%"+campo+"%'"
+                    + "or fechaInicio like '%"+campo+"%' or fechaRecojo like '%"+campo+"%'";
         }
         
         
@@ -397,6 +406,23 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cajaBuscarActionPerformed
 
+    public void limpiarCajas(){
+        cajaCodigo.setText(null);
+        cajaNombre.setText(null);
+        cajaApellido.setText(null);
+        cajaDescripcion.setText(null);
+        cajaPrecio.setText(null);
+        cajaaCuenta.setText(null);
+        cajaCancelado.setText(null);
+        comboEstado.setSelectedItem(0); 
+    }
+    
+    public void obtenerFecha(){
+        //Aquí colocas tu objeto tipo Date
+        
+    }
+    
+    
     private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
        PreparedStatement ps = null;
        ResultSet rs = null;
@@ -421,6 +447,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
             ps.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Registro ingresado correctamente");
+            limpiarCajas();
             
 
         }catch(Exception ex){
